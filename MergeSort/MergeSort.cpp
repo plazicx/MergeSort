@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include <array>
+#include <cstdlib>
 
 void ispisi(int arr[], int n) {
 	for (int i = 0; i < n; ++i) {
@@ -139,6 +140,12 @@ void Heapify(int arr[], int size, int node) {
 			arr[child_2] = tmp;
 			swap_2 = 1;
 		}
+		else { // had a bug this was missing
+			int tmp = arr[node];
+			arr[node] = arr[child_2];
+			arr[child_2] = tmp;
+			swap_2 = 1;
+		}
 	}
 	if (swap_1 == 1) {
 		Heapify(arr, size, child_1);
@@ -149,13 +156,30 @@ void Heapify(int arr[], int size, int node) {
 }
 
 void MaxHeap(int arr[], int size) {
-	for (int i = size-1; i > 0; --i) {
+	for (int i = size-1; i > -1; --i) {
 		Heapify(arr, size, i);
 	}
+	
+}
+void draw_tree(int arr[], int size)
+{
+	std::cout << "Draw tree!!!! ----------------------" << std::endl;
+	int count = 1;
+	for (int i = 0; i < size; ++i) {
+		std::cout << arr[i] << " ";
+		if ((i+2)%count == 0) {
+			std::cout << std::endl;
+			count*=2;
+		}
+		
+	}
+	std::cout << "-------------------------------------------" << std::endl;
 }
 
 void HeapSort(int arr[], int size) {
+	draw_tree(arr, size);
 	MaxHeap(arr, size);
+	draw_tree(arr, size);
 	int curr_size = size;
 	for (int i = 0; i<size; ++i) {
 		Heapify(arr, curr_size, 0);
@@ -170,10 +194,24 @@ void HeapSort(int arr[], int size) {
 int main()
 {
 	int n = 11;
-	int arr0[11]{ 0, 6,5,8,1,-5,2,3,-6,7,8 };
+	
+	
+	int * arr0 = new int[n] { 41, 467, 334, 500, 169, 724, 478, 358, 962, 464, 705 };
+	
+	if (0) {
+		int * arr0 = new int[n];
+		for (int i = 0; i < n; ++i)
+		{
+			arr0[i] = rand() % 1000;
+		}
+	}
+	
+
+	int * arr = new int[n];
+
 	for (int j = 0; j < 3; ++j) {
 		
-		int arr[11];
+		
 		for (int i = 0; i < n; ++i) {
 			arr[i] = arr0[i];
 		}
@@ -203,7 +241,9 @@ int main()
 		}
 		std::cout << std::endl;
 	}
-}
+	delete[] arr;
+	delete[] arr0;
+} 
 //simple change 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
