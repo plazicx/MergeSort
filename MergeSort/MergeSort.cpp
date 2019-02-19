@@ -177,9 +177,9 @@ void draw_tree(int arr[], int size)
 }
 
 void HeapSort(int arr[], int size) {
-	draw_tree(arr, size);
+	//draw_tree(arr, size);
 	MaxHeap(arr, size);
-	draw_tree(arr, size);
+	//draw_tree(arr, size);
 	int curr_size = size;
 	for (int i = 0; i<size; ++i) {
 		Heapify(arr, curr_size, 0);
@@ -193,13 +193,14 @@ void HeapSort(int arr[], int size) {
 
 int main()
 {
-	int n = 11;
+	int n = 21;
 	
 	
-	int * arr0 = new int[n] { 41, 467, 334, 500, 169, 724, 478, 358, 962, 464, 705 };
+	//int * arr0 = new int[n] { 41, 467, 334, 500, 169, 724, 478, 358, 962, 464, 705 };
 	
-	if (0) {
-		int * arr0 = new int[n];
+	int * arr0 = new int[n];
+	if (1) {
+		
 		for (int i = 0; i < n; ++i)
 		{
 			arr0[i] = rand() % 1000;
